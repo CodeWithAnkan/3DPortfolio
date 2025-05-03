@@ -92,9 +92,9 @@ This project is based on the amazing work and tutorials of **Adrian Hajdin**, th
 
 If you'd like to connect or collaborate, feel free to reach out:
 
-- 📧 **Email:** yourname@example.com  
+- 📧 **Email:** 23051814@kiit.ac.in  
 - 🔗 **LinkedIn:** [linkedin.com/in/ankan](https://www.linkedin.com/in/ankan-chatterjee-4208a8187/)  
-- 🐦 **Twitter:** [@yourhandle](https://x.com/ankan_coder)  
+- 🐦 **Twitter:** [@ankan_coder](https://x.com/ankan_coder)  
 
 ---
 
