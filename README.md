@@ -54,7 +54,7 @@ This project is a visually engaging portfolio website that features:
 
 ## 🚀 Live Demo
 
-🔗 [Check out the live portfolio here](https://your-portfolio-url.vercel.app)
+🔗 [Check out the live portfolio here](https://3-d-portfolio-beige-two.vercel.app/)
 
 ---
 
