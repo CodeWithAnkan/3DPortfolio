@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import {
     useUser,
@@ -11,7 +11,7 @@ import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/Models/contact/ContactExperience";
 
 const Contact = () => {
-    const { user } = useUser(); // Clerk user object
+    const { user } = useUser();
     const formRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
@@ -19,6 +19,15 @@ const Contact = () => {
         email: "",
         message: "",
     });
+
+    useEffect(() => {
+        if (user) {
+            setForm((prevForm) => ({
+                ...prevForm,
+                email: user?.primaryEmailAddress?.emailAddress || "",
+            }));
+        }
+    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,14 +39,22 @@ const Contact = () => {
         setLoading(true);
 
         try {
-            await emailjs.sendForm(
+            await emailjs.send(
                 import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-                formRef.current,
+                {
+                    name: form.name,
+                    email: form.email,
+                    message: form.message,
+                },
                 import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
             );
 
-            setForm({ name: "", email: "", message: "" });
+            setForm({
+                name: "",
+                email: user?.primaryEmailAddress?.emailAddress || "",
+                message: "",
+            });
         } catch (error) {
             console.error("EmailJS Error:", error);
         } finally {
@@ -53,7 +70,6 @@ const Contact = () => {
                     sub="💬 Have questions or ideas? Let’s talk! 🚀"
                 />
 
-                {/* Show SignIn button if user is not logged in */}
                 <SignedOut>
                     <div className="flex flex-col items-center justify-center mt-10 gap-4">
                         <p className="text-lg text-gray-600">Please sign in to contact me.</p>
@@ -65,7 +81,6 @@ const Contact = () => {
                     </div>
                 </SignedOut>
 
-                {/* Show form only if signed in */}
                 <SignedIn>
                     <div className="grid-12-cols mt-16">
                         <div className="xl:col-span-5">
@@ -94,8 +109,8 @@ const Contact = () => {
                                             type="email"
                                             id="email"
                                             name="email"
-                                            value={user?.primaryEmailAddress?.emailAddress || ""}
-                                            disabled
+                                            value={form.email}
+                                            onChange={handleChange}
                                             readOnly
                                             required
                                         />
