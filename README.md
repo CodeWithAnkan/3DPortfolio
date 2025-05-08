@@ -104,7 +104,7 @@ If you'd like to connect or collaborate, feel free to reach out:
 
 * 📧 **Email:** [23051814@kiit.ac.in](mailto:23051814@kiit.ac.in)
 * 🔗 **LinkedIn:** [linkedin.com/in/ankan](https://www.linkedin.com/in/ankan-chatterjee-4208a8187/)
-* 🐖 **Twitter:** [@ankan\_coder](https://x.com/ankan_coder)
+* 🦁 **Twitter:** [@ankan\_coder](https://x.com/ankan_coder)
 
 ---
 
