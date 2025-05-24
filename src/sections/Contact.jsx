@@ -72,9 +72,9 @@ const Contact = () => {
 
                 <SignedOut>
                     <div className="flex flex-col items-center justify-center mt-10 gap-4">
-                        <p className="text-lg text-gray-600">Please sign in to contact me.</p>
+                        <p className="text-lg" style={{ color: 'var(--secondary-text-color)' }}>Please sign in to contact me.</p> {/* Changed text-gray-600 */}
                         <SignInButton mode="modal">
-                            <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                            <button className="clerk-themed-button px-6 py-2"> {/* Applied themed button class, kept specific padding */}
                                 Sign In
                             </button>
                         </SignInButton>

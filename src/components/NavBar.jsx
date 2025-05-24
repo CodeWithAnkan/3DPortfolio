@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { navLinks } from "../constants/index.js";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
-const NavBar = () => {
+const NavBar = ({ toggleTheme, currentTheme }) => { // Destructure props here
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const NavBar = () => {
                 <div className="flex items-center gap-4">
                     <SignedOut>
                         <SignInButton mode="modal">
-                            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                            <button className="clerk-themed-button"> {/* Applied themed button class */}
                                 Sign In
                             </button>
                         </SignInButton>
@@ -45,6 +45,19 @@ const NavBar = () => {
                     <SignedIn>
                         <UserButton afterSignOutUrl="/" />
                     </SignedIn>
+
+                    {/* Theme Switcher Button */}
+                    <button
+                        onClick={toggleTheme}
+                        className="contact-btn group" // Re-use existing button styling
+                        aria-label={`Switch to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`}
+                    >
+                        <div className="inner">
+                            <span>
+                                {currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+                            </span>
+                        </div>
+                    </button>
 
                     <a href="#contact" className="contact-btn group">
                         <div className="inner">

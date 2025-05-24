@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Analytics } from "@vercel/analytics/react"
 import Hero from "./sections/Hero.jsx";
 import ShowcaseSection from "./sections/ShowcaseSection.jsx";
@@ -12,9 +12,37 @@ import Footer from "./sections/Footer.jsx";
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const App = () => {
+    const [theme, setTheme] = useState('dark'); // Default theme
+
+    const loadTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersLight) {
+            setTheme('light');
+        } else {
+            setTheme('dark'); // Default to dark if no preference or system is dark
+        }
+    };
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    };
+
+    useEffect(() => {
+        loadTheme();
+    }, []); // Run once on mount
+
+    useEffect(() => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
     return (
         <>
-            <NavBar />
+            <NavBar toggleTheme={toggleTheme} currentTheme={theme} />
             <Hero />
             <ShowcaseSection />
             <LogoSection />
