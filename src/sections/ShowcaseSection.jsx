@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ShowcaseSection = () => {
     const sectionRef = useRef(null);
-    const project1Ref = useRef(null);
     const projectRefs = useRef([]);
 
     const githubProjects = [
@@ -31,14 +30,14 @@ const ShowcaseSection = () => {
         },
         {
             title: "Earnings Analyzer",
-            image: "/images/cine.png",
+            image: "/images/project4.png",
             bgClass: "bg-[#e8f8f2]",
             repoUrl: "https://github.com/CodeWithAnkan/earnings-analyzer",
         },
     ];
 
     useGSAP(() => {
-        const projects = [project1Ref.current, ...projectRefs.current];
+        const projects = projectRefs.current;
         projects.forEach((card, index) => {
             if (!card) return;
             gsap.fromTo(
@@ -61,7 +60,9 @@ const ShowcaseSection = () => {
             <div className="w-full">
                 <div className="showcaselayout">
                     {/*LEFT*/}
-                    <div className="first-project-wrapper pt-6" ref={project1Ref}>
+                    <div className="first-project-wrapper pt-6" ref={(el) => {
+                        projectRefs.current[0] = el;
+                    }}>
                         <div className="image-wrapper">
                             <img src="/images/CineIQ.png"  alt="CineIQ"/>
                         </div>
@@ -80,7 +81,7 @@ const ShowcaseSection = () => {
                                 className="project pt-6"
                                 key={project.title}
                                 ref={(el) => {
-                                    projectRefs.current[index] = el;
+                                    projectRefs.current[index + 1] = el;
                                 }}
                             >
                                 <div className={`image-wrapper ${project.bgClass}`}>
@@ -88,7 +89,7 @@ const ShowcaseSection = () => {
                                     <h2>{project.title}</h2>
                                 </div>
                                 <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub`} className="text-white-50 md:text-lg hover:text-white">
-                                    View on GitHub
+                                    View {project.title} on GitHub
                                 </a>
                             </div>
                         ))}
