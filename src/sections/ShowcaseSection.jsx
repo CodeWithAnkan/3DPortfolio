@@ -7,13 +7,39 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ShowcaseSection = () => {
     const sectionRef = useRef(null);
-    const project1Ref = useRef(null);
-    const project2Ref = useRef(null);
-    const project3Ref = useRef(null);
+    const projectRefs = useRef([]);
+
+    const githubProjects = [
+        {
+            title: "Klarity",
+            image: "/images/project1.png",
+            bgClass: "bg-[#ffefdb]",
+            repoUrl: "https://github.com/CodeWithAnkan/klarity",
+        },
+        {
+            title: "Kuber AI Invoice App",
+            image: "/images/project2.png",
+            bgClass: "bg-[#f1f5ff]",
+            repoUrl: "https://github.com/CodeWithAnkan/kuber-ai-invoice-app",
+        },
+        {
+            title: "PathForge AI",
+            image: "/images/project3.png",
+            bgClass: "bg-[#ffe7eb]",
+            repoUrl: "https://github.com/CodeWithAnkan/pathforge-ai",
+        },
+        {
+            title: "Earnings Analyzer",
+            image: "/images/project4.png",
+            bgClass: "bg-[#e8f8f2]",
+            repoUrl: "https://github.com/CodeWithAnkan/earnings-analyzer",
+        },
+    ];
 
     useGSAP(() => {
-        const projects = [project1Ref.current, project2Ref.current, project3Ref.current];
+        const projects = projectRefs.current;
         projects.forEach((card, index) => {
+            if (!card) return;
             gsap.fromTo(
                 card,
                 {y: 50, opacity: 0},
@@ -34,7 +60,9 @@ const ShowcaseSection = () => {
             <div className="w-full">
                 <div className="showcaselayout">
                     {/*LEFT*/}
-                    <div className="first-project-wrapper pt-6" ref={project1Ref}>
+                    <div className="first-project-wrapper pt-6" ref={(el) => {
+                        projectRefs.current[0] = el;
+                    }}>
                         <div className="image-wrapper">
                             <img src="/images/CineIQ.png"  alt="CineIQ"/>
                         </div>
@@ -48,19 +76,23 @@ const ShowcaseSection = () => {
 
                     {/*RIGHT*/}
                     <div className="project-list-wrapper overflow-hidden">
-                        <div className="project pt-6" ref={project2Ref}>
-                            <div className="image-wrapper bg-[#ffefdb]">
-                                <img src="/images/project2.png" alt="Library Management"/>
-                                <h2>Library Management Platform</h2>
+                        {githubProjects.map((project, index) => (
+                            <div
+                                className="project pt-6"
+                                key={project.title}
+                                ref={(el) => {
+                                    projectRefs.current[index + 1] = el;
+                                }}
+                            >
+                                <div className={`image-wrapper ${project.bgClass}`}>
+                                    <img src={project.image} alt={project.title}/>
+                                    <h2>{project.title}</h2>
+                                </div>
+                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub`} className="text-white-50 md:text-lg hover:text-white">
+                                    View {project.title} on GitHub
+                                </a>
                             </div>
-                        </div>
-
-                        <div className="project pt-6" ref={project3Ref}>
-                            <div className="image-wrapper bg-[#ffe7eb]">
-                                <img src="/images/project3.png" alt="YC Directory"/>
-                                <h2>YC Directory - A Startup Showcase App</h2>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
