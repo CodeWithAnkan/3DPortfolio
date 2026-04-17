@@ -31,7 +31,7 @@ const ShowcaseSection = () => {
         },
         {
             title: "Earnings Analyzer",
-            image: "/images/node.png",
+            image: "/images/cine.png",
             bgClass: "bg-[#e8f8f2]",
             repoUrl: "https://github.com/CodeWithAnkan/earnings-analyzer",
         },
@@ -87,7 +87,7 @@ const ShowcaseSection = () => {
                                     <img src={project.image} alt={project.title}/>
                                     <h2>{project.title}</h2>
                                 </div>
-                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="text-white-50 md:text-lg hover:text-white">
+                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub`} className="text-white-50 md:text-lg hover:text-white">
                                     View on GitHub
                                 </a>
                             </div>
